@@ -106,23 +106,29 @@ def Encrypt(image_path, s):
     timefinish = time.time()
     
     # l. Request image file to save
-    image_save = input("Insert image path to save the encoded images: ")
+    image_save = input("\033[93mInsert image path to save the encoded images \n >> \033[37m")
     encoded_img.save(image_save)
     
     # m. Outputting
     print("")
-    print("Here is your private key")
-    print("n =",n,"e =",e)
+    print("========================  RESULT  ========================")
+    print('\033[92m' + "Result messages has succesfully encrypted and written on",image_save)
+    print(f"Encryption time: \033[37m{timefinish-timestart} \033[92msecond(s).")
+    print("Here is your key")
+    print(f"     Private key >> \033[37m{n}  |  \033[92mPublic key >> \033[37m{e}")
     print("")
-    print("Save this key whenever you want to decrypt the words!")
+    print("Save this key and use it whenever you want to decrypt the messages!")
     with open('Encrypted.txt', 'w') as file:
         file.write(f'{res}')
-    print("Result image was written on",image_save)
-    print("The text result is also written on Encrypted.txt\n")
-    print("Encryption time:",timefinish-timestart,"second(s).")
+    print("The encyypted text is also written on Encrypted.txt\n")
 
 # 7. Decrypting Code   
 def Decrypt(image_path, n, e):
+    # xx. Outputing
+    print("")
+    print("========================  RESULT  ========================")
+    print("Get a result....")
+    
     # xx. Starting time
     timestart = time.time()
     
@@ -176,15 +182,18 @@ def Decrypt(image_path, n, e):
     timefinish = time.time()
     
     # j. Outputting
-    print("")
+    print('\033[92m' + "\nMessages has succesfully decrypted")
+    print(f"Decryption time: \033[37m{timefinish-timestart} \033[92msecond(s).")
     print("Result of Decryption:")
-    print(res)
+    print('\033[37m' + res)
     print("")
-    print("Decryption time:",timefinish-timestart,"second(s).")
+    with open('Decrypted.txt', 'w') as file:
+        file.write(f'{res}')
+    print("The decyypted text is also written on Decrypted.txt\n")
     
 # ALGORITHM - MAIN PROGRAM
 print("Welcome to RSA Stenography - Optimized Version!")
-print("Decide your choice")
+print("\nDecide your choice")
 print("1. Encrypting Image")
 print("2. Decrypting Image\n")
 check = int(input("Your input: "))
@@ -193,25 +202,25 @@ check = int(input("Your input: "))
 valid = False
 while (not valid):
     if check == 1:
-        image_path = input("Insert image path to encode: ")
+        image_path = input("\033[93mInsert image path to encode \n >> \033[37m")
         if isExist(image_path):
-            s = input("Insert words to encrypt: \n")
+            s = input("\033[93mInsert words to encrypt \n >> \033[37m")
             Encrypt(image_path,s)
             valid = True
         else :
-            print("Image file is not exist")
+            print('\033[31m' + "Image file is not exist")
             valid = False
     elif check == 2 :
-        image_path = input("Insert image path to decode: ")
+        image_path = input("\033[93mInsert image path to decode \n >> \033[37m")
         if isExist(image_path):
-            n = int(input("Insert the n value: "))
-            e = int(input("Insert the public key: "))
+            n = int(input("\033[93mInsert the private key \n >> \033[37m"))
+            e = int(input("\033[93mInsert the public key \n >> \033[37m"))
             Decrypt(image_path,n,e)
             valid = True
         else :
-            print("Image file is not exist")
+            print('\033[31m' + "Image file is not exist")
             valid = False
     else :
         valid = False
-        print("Your input is Invalid!\n")
+        print('\033[31m' + "Your input is Invalid!\n")
         check = int(input("Your input : "))

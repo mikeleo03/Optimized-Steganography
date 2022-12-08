@@ -8,7 +8,7 @@ import time
 
 # ALGORITHM - MAIN PROGRAM
 print("Welcome to RSA Stenography - Basic Version!")
-print("Decide your choice")
+print("\nDecide your choice")
 print("1. Encrypting Image")
 print("2. Decrypting Image\n")
 check = int(input("Your input: "))
@@ -17,11 +17,11 @@ check = int(input("Your input: "))
 valid = False
 while (not valid):
     if check == 1:
-        image_path = input("Insert image path to encode: ")
+        image_path = input("\033[93mInsert image path to encode \n >> \033[37m")
         if isExist(image_path):
-            s = input("Insert words to encrypt: \n")
+            s = input("\033[93mInsert words to encrypt \n >> \033[37m")
             # a. Request image file to save
-            image_save = input("Insert image path to save the encoded images: ")
+            image_save = input("\033[93mInsert image path to save the encoded images \n >> \033[37m")
             # xx. Starting time
             timestart = time.time()
             # b. Insert image paths after validating scheme
@@ -35,16 +35,20 @@ while (not valid):
             timefinish = time.time()
             # d. Outputting
             print("")
-            print("Result image was written on",image_save)
-            print("")
-            print("Encryption time:",timefinish-timestart,"second(s).")
+            print("========================  RESULT  ========================")
+            print('\033[92m' + "Result messages has succesfully encrypted and written on",image_save)
+            print(f"Encryption time: \033[37m{timefinish-timestart} \033[92msecond(s).\n")
             valid = True
         else :
-            print("Image file is not exist")
+            print('\033[31m' + "Image file is not exist")
             valid = False
     elif check == 2 :
-        image_path = input("Insert image path to decode: ")
+        image_path = input("\033[93mInsert image path to decode \n >> \033[37m")
         if isExist(image_path):
+            # xx. Outputting
+            print("")
+            print("========================  RESULT  ========================")
+            print("Get a result....")
             # xx. Starting time
             timestart = time.time()
             # a. Image path to analyze stenography after validating
@@ -54,16 +58,19 @@ while (not valid):
             # xx. Finish time
             timefinish = time.time()
             # c. Outputting
-            print("")
+            print('\033[92m' + "\nMessages has succesfully decrypted")
+            print(f"Decryption time: \033[37m{timefinish-timestart} \033[92msecond(s).")
             print("Result of Decryption:")
-            print(kata)
+            print('\033[37m' + kata)
             print("")
-            print("Decryption time:",timefinish-timestart,"second(s).")
+            with open('Decrypted.txt', 'w') as file:
+                file.write(f'{kata}')
+            print("The decyypted text is also written on Decrypted.txt\n")
             valid = True
         else :
-            print("Image file is not exist")
+            print('\033[31m' + "Image file is not exist")
             valid = False
     else :
         valid = False
-        print("Your input is Invalid!\n")
-        check = int(input("Your input : "))
+        print('\033[31m' + "Your input is Invalid!\n")
+        check = int(input('\033[37m' + "Your input : "))
